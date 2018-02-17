@@ -1,30 +1,31 @@
 const express = require('express');
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
-const { createCanvas } = require("canvas");
+
+const { createCanvas } = require('canvas');
 
 const app = new express();
 
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.set('view engine', 'html');
 
-app.use('/', express.static('dist', {index: false}));
+app.use('/', express.static('dist', { index: false }));
 
-app.get('/', (req,res) => {
-    res.sendFile('index.html', { root: __dirname });
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: __dirname });
 });
 
+// NODE_PATH='yourdir'/node_modules
 app.get('/test', (req, res) => {
-
   const canvas = createCanvas(200, 200);
   const ctx = canvas.getContext('2d');
 
   // Write "Awesome!"
   ctx.font = '30px Impact';
   ctx.rotate(0.1);
-  ctx.fillText('Awesome!', 50, 100);
+  ctx.fillText('lol!', 50, 100);
 
   // Draw line under text
-  const text = ctx.measureText('Awesome!');
+  const text = ctx.measureText('lol!');
   ctx.strokeStyle = 'rgba(0,0,0,0.5)';
   ctx.beginPath();
   ctx.lineTo(50, 102);

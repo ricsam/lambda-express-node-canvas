@@ -8,8 +8,15 @@ provider:
   runtime: nodejs6.10
   memorySize: 128
   timeout: 10
-  stage: production
+  stage: dev
   region: eu-central-1
+  environment:
+    NODE_PATH: ${file(config.${self:provider.stage}.json):NODE_PATH}
+
+
+package:
+  exclude:
+    - ${file(config.${self:provider.stage}.json):EXCLUDE_DIR}
 
 custom:
   apigwBinary:
@@ -22,3 +29,5 @@ functions:
     events:
       - http: ANY {proxy+}
       - http: ANY /
+
+

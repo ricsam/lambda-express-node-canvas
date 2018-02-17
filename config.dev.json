@@ -1,0 +1,4 @@
+{
+	"NODE_PATH": "/var/task/lambda_node_modules",
+	"EXCLUDE_DIR": "node_modules/**"
+}

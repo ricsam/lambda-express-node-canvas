@@ -34,11 +34,14 @@
   },
   "dependencies": {
     "aws-serverless-express": "^3.0.0",
+    "canvas": "2.0.0-alpha.9",
     "express": "^4.15.2",
+    "nan": "2.8.0",
+    "nodemon": "^1.11.0",
+    "serverless": "^1.21.1",
     "serverless-apigw-binary": "^0.4.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0",
-    "serverless": "^1.21.1"
+    "prettier": "^1.10.2"
   }
 }

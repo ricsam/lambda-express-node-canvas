@@ -1,4 +1,10 @@
 .DS_Store
 
-node_modules/*
-!node_modules/canvas
+node_modules
+testing_tmp
+
+lambda_node_modules/*
+!lambda_node_modules/canvas
+!lambda_node_modules/nan
+
+

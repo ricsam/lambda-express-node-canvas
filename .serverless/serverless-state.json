@@ -5,13 +5,16 @@
       "name": "binary-express-maciej-treder"
     },
     "provider": {
-      "stage": "production",
+      "stage": "dev",
       "region": "eu-central-1",
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
       "runtime": "nodejs6.10",
       "memorySize": 128,
       "timeout": 10,
+      "environment": {
+        "NODE_PATH": "/var/task/lambda_node_modules"
+      },
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -24,7 +27,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/binary-express-maciej-treder-production-api"
+              "LogGroupName": "/aws/lambda/binary-express-maciej-treder-dev-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -52,7 +55,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "production",
+                        "dev",
                         "binary-express-maciej-treder",
                         "lambda"
                       ]
@@ -68,7 +71,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/binary-express-maciej-treder-production-api:*"
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/binary-express-maciej-treder-dev-api:*"
                           }
                         ]
                       },
@@ -79,7 +82,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/binary-express-maciej-treder-production-api:*:*"
+                            "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/binary-express-maciej-treder-dev-api:*:*"
                           }
                         ]
                       }
@@ -93,7 +96,7 @@
                   "-",
                   [
                     "binary-express-maciej-treder",
-                    "production",
+                    "dev",
                     "eu-central-1",
                     "lambdaRole"
                   ]
@@ -108,9 +111,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/binary-express-maciej-treder/production/1518646752382-2018-02-14T22:19:12.382Z/binary-express-maciej-treder.zip"
+                "S3Key": "serverless/binary-express-maciej-treder/dev/1518878719015-2018-02-17T14:45:19.015Z/binary-express-maciej-treder.zip"
               },
-              "FunctionName": "binary-express-maciej-treder-production-api",
+              "FunctionName": "binary-express-maciej-treder-dev-api",
               "Handler": "lambda.express",
               "MemorySize": 128,
               "Role": {
@@ -120,27 +123,32 @@
                 ]
               },
               "Runtime": "nodejs6.10",
-              "Timeout": 10
+              "Timeout": 10,
+              "Environment": {
+                "Variables": {
+                  "NODE_PATH": "/var/task/lambda_node_modules"
+                }
+              }
             },
             "DependsOn": [
               "ApiLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiLambdaVersionhFNjbwcHi3TU3nmSNu6lXmR88XNhQNksYqdrqQrPH5w": {
+          "ApiLambdaVersionGH641soLe0hOYVvvk1vtDRaFfQaLqetulPByzBlvpnw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "M3Gr2ZOoeK4WfMpdkCb6dRmWeS9HlOR0bRE9pXCsTeo="
+              "CodeSha256": "CLLGqUhc3mn15dmHG0nMZKSTYsGkC4JeinmPgLI8CKs="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "production-binary-express-maciej-treder",
+              "Name": "dev-binary-express-maciej-treder",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -244,13 +252,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1518646752530": {
+          "ApiGatewayDeployment1518878719165": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "production"
+              "StageName": "dev"
             },
             "DependsOn": [
               "ApiGatewayMethodProxyVarAny",
@@ -300,7 +308,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionhFNjbwcHi3TU3nmSNu6lXmR88XNhQNksYqdrqQrPH5w"
+              "Ref": "ApiLambdaVersionGH641soLe0hOYVvvk1vtDRaFfQaLqetulPByzBlvpnw"
             }
           },
           "ServiceEndpoint": {
@@ -313,7 +321,7 @@
                   {
                     "Ref": "ApiGatewayRestApi"
                   },
-                  ".execute-api.eu-central-1.amazonaws.com/production"
+                  ".execute-api.eu-central-1.amazonaws.com/dev"
                 ]
               ]
             }
@@ -359,7 +367,7 @@
             "http": "ANY /"
           }
         ],
-        "name": "binary-express-maciej-treder-production-api",
+        "name": "binary-express-maciej-treder-dev-api",
         "package": {},
         "vpc": {}
       }
@@ -367,7 +375,7 @@
     "artifact": "/Users/richie/projects/lambdas/express/.serverless/binary-express-maciej-treder.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/binary-express-maciej-treder/production/1518646752382-2018-02-14T22:19:12.382Z",
+    "artifactDirectoryName": "serverless/binary-express-maciej-treder/dev/1518878719015-2018-02-17T14:45:19.015Z",
     "artifact": "binary-express-maciej-treder.zip"
   }
 }
